@@ -118,6 +118,12 @@ form {
   border-bottom-color: var(--color-ink);
 }
 
+.form-error {
+  color: var(--color-debit);
+  font-size: 13px;
+  margin: -6px 0 12px;
+}
+
 form button[type='submit'] {
   font-family: var(--font-body);
   font-size: 14px;
