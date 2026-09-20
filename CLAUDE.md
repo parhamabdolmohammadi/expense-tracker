@@ -36,8 +36,6 @@ management library, and no component decomposition yet:
   resets on reload.
 - Styling is plain CSS in `src/App.css` and `src/index.css` (no CSS
   modules, no Tailwind, no CSS-in-JS).
-- `transactions[].amount` is stored as a **string** (e.g. `"5000"`), not a
-  number, which affects any arithmetic done on it (e.g. `reduce` sums).
 
 ## Linting
 
