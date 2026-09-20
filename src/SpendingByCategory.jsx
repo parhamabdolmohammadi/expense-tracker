@@ -38,7 +38,7 @@ function SpendingByCategory({ transactions, categories }) {
               labelFormatter={capitalize}
               cursor={{ fill: '#f5f5f5' }}
             />
-            <Bar dataKey="amount" fill="#3b82f6" radius={[0, 4, 4, 0]} maxBarSize={28} />
+            <Bar dataKey="amount" fill="#2a78d6" radius={[0, 4, 4, 0]} maxBarSize={28} />
           </BarChart>
         </ResponsiveContainer>
       )}
