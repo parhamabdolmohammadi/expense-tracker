@@ -1,7 +1,6 @@
 import { useState } from 'react'
+import { formatCategoryLabel } from './categoryColors.js'
 import { formatCurrency } from './formatCurrency.js'
-
-const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1)
 
 function TransactionList({ transactions, categories, onDeleteTransaction }) {
   const [filterType, setFilterType] = useState("all");
@@ -27,7 +26,7 @@ function TransactionList({ transactions, categories, onDeleteTransaction }) {
         <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
           <option value="all">All categories</option>
           {categories.map(cat => (
-            <option key={cat} value={cat}>{capitalize(cat)}</option>
+            <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
       </div>
@@ -35,41 +34,37 @@ function TransactionList({ transactions, categories, onDeleteTransaction }) {
       {filteredTransactions.length === 0 ? (
         <p className="empty-state">No transactions match these filters.</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Category</th>
-              <th className="amount-col">Amount</th>
-              <th className="actions-col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTransactions.map(t => (
-              <tr key={t.id}>
-                <td>{t.date}</td>
-                <td>{t.description}</td>
-                <td>{capitalize(t.category)}</td>
-                <td className={`amount-col ${t.type === "income" ? "income-amount" : "expense-amount"}`}>
-                  {t.type === "income" ? "+" : "-"}{formatCurrency(t.amount)}
-                </td>
-                <td className="actions-col">
-                  <button
-                    className="delete-btn"
-                    onClick={() => {
-                      if (window.confirm(`Are you sure that you want to delete "${t.description}"?`)) {
-                        onDeleteTransaction(t.id);
-                      }
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="ledger-rows">
+          <div className="ledger-row ledger-row-head">
+            <span className="col-date">Date</span>
+            <span className="col-desc">Description</span>
+            <span className="col-category">Category</span>
+            <span className="col-amount">Amount</span>
+            <span className="col-actions"></span>
+          </div>
+          {filteredTransactions.map(t => (
+            <div className="ledger-row" key={t.id}>
+              <span className="col-date">{t.date}</span>
+              <span className="col-desc">{t.description}</span>
+              <span className="col-category">{formatCategoryLabel(t.category)}</span>
+              <span className={`col-amount ${t.type === "income" ? "credit" : "debit"}`}>
+                {t.type === "income" ? "+" : "−"}{formatCurrency(t.amount)}
+              </span>
+              <span className="col-actions">
+                <button
+                  className="delete-btn"
+                  onClick={() => {
+                    if (window.confirm(`Are you sure that you want to delete "${t.description}"?`)) {
+                      onDeleteTransaction(t.id);
+                    }
+                  }}
+                >
+                  Remove
+                </button>
+              </span>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

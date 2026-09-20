@@ -1,8 +1,4 @@
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-})
-
 export function formatCurrency(amount) {
-  return formatter.format(amount)
+  const sign = amount < 0 ? '-' : ''
+  return `${sign}$${Math.abs(amount).toFixed(2)}`
 }

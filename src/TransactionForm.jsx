@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1)
-
 function TransactionForm({ categories, onAddTransaction }) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
@@ -29,40 +27,36 @@ function TransactionForm({ categories, onAddTransaction }) {
 
   return (
     <div className="add-transaction">
-      <h2>Add transaction</h2>
+      <h2>Add a transaction</h2>
       <form onSubmit={handleSubmit}>
         <label className="field field-description">
-          <span className="field-label">Description</span>
+          <span>Description</span>
           <input
             type="text"
-            placeholder="e.g. Groceries"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        <label className="field field-amount">
-          <span className="field-label">Amount</span>
+        <label className="field">
+          <span>Amount</span>
           <input
             type="number"
-            placeholder="0.00"
-            step="0.01"
-            min="0"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
-        <label className="field field-type">
-          <span className="field-label">Type</span>
+        <label className="field">
+          <span>Type</span>
           <select value={type} onChange={(e) => setType(e.target.value)}>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
         </label>
-        <label className="field field-category">
-          <span className="field-label">Category</span>
+        <label className="field">
+          <span>Category</span>
           <select value={category} onChange={(e) => setCategory(e.target.value)}>
             {categories.map(cat => (
-              <option key={cat} value={cat}>{capitalize(cat)}</option>
+              <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
         </label>

@@ -12,23 +12,13 @@ function Summary({ transactions }) {
   const balance = totalIncome - totalExpenses;
 
   return (
-    <div className="summary">
-      <div className="balance-hero">
-        <p className="balance-label">Current balance</p>
-        <p className={`balance-amount ${balance < 0 ? 'is-negative' : ''}`}>
-          {formatCurrency(balance)}
-        </p>
-      </div>
-      <div className="summary-stats">
-        <div className="stat">
-          <p className="stat-label">Income</p>
-          <p className="stat-amount income-amount">+{formatCurrency(totalIncome)}</p>
-        </div>
-        <div className="stat">
-          <p className="stat-label">Expenses</p>
-          <p className="stat-amount expense-amount">-{formatCurrency(totalExpenses)}</p>
-        </div>
-      </div>
+    <div className="balance-block">
+      <p className="balance-label">Your balance</p>
+      <p className="balance-amount">{formatCurrency(balance)}</p>
+      <p className="balance-meta">
+        <span className="credit">↑ {formatCurrency(totalIncome)} in</span>
+        <span className="debit">↓ {formatCurrency(totalExpenses)} out</span>
+      </p>
     </div>
   );
 }
